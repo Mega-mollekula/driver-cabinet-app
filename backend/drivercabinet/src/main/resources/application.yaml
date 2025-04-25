@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: drivercabinet
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/drivercabinet
+    username: mollekula
+    password: Artem2005
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      show-sql: true
+
+  flyway:
+    enabled: false
+
+server:
+  port: 8080
