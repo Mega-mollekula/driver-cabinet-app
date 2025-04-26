@@ -1,5 +1,6 @@
 package com.example.drivercabinet.database.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 
 @Entity
@@ -16,6 +17,7 @@ class GasStation(
     var fuelTypes: Set<FuelType> = mutableSetOf(),
 
     @ManyToMany(mappedBy = "gasStations")
+    @JsonBackReference
     val routes: List<Route> = mutableListOf()
 )
 

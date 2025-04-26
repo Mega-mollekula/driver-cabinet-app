@@ -7,6 +7,6 @@ interface GasStationService {
     fun getAll(): List<GasStationResponse>
     fun getById(gasStationId: Long): GasStationResponse
     fun update(gasStationId: Long, gasStationRequest: GasStationRequest): GasStationResponse
-    fun create(gasStationId: GasStationRequest): GasStationResponse
+    fun create(gasStationRequest: GasStationRequest): GasStationResponse
     fun delete(gasStationId: Long)
 }

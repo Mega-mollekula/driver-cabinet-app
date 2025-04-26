@@ -18,12 +18,12 @@ class GasStationServiceImpl (
 
     override fun getById(gasStationId: Long): GasStationResponse =
         mapper.entityToResponse(dao.findById(gasStationId).orElseThrow {
-            IllegalArgumentException("Driver not found with id $gasStationId")
+            IllegalArgumentException("Station not found with id $gasStationId")
         })
 
     override fun update(gasStationId: Long, gasStationRequest: GasStationRequest): GasStationResponse {
         val gasStation = dao.findById(gasStationId).orElseThrow {
-            IllegalArgumentException("Driver not found with id $gasStationId")
+            IllegalArgumentException("Station not found with id $gasStationId")
         }
         gasStation.address = gasStationRequest.address
         gasStation.fuelTypes = gasStationRequest.fuelTypes
@@ -40,7 +40,7 @@ class GasStationServiceImpl (
 
     override fun delete(gasStationId: Long) {
         val gasStation = dao.findById(gasStationId).orElseThrow {
-            IllegalArgumentException("Driver not found with id $gasStationId")
+            IllegalArgumentException("Station not found with id $gasStationId")
         }
         dao.delete(gasStation)
     }

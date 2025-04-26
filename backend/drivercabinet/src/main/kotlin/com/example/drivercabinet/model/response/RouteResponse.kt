@@ -6,5 +6,5 @@ data class RouteResponse(
     val id: Long,
     val origin: String,
     val destination: String,
-    val gasStations: List<GasStation>
+    val gasStations:MutableList<GasStation>,
 )

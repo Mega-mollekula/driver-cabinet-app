@@ -4,7 +4,9 @@ import com.example.drivercabinet.model.request.RouteRequest
 import com.example.drivercabinet.model.response.RouteResponse
 
 interface RouteService {
-    fun createRoute(request: RouteRequest): RouteResponse
-    fun getRoute(id: Long): RouteResponse
-    fun getAllRoutes(): List<RouteResponse>
+    fun getAll(): List<RouteResponse>
+    fun getById(routeId: Long): RouteResponse
+    fun update(routeId: Long, routeRequest: RouteRequest): RouteResponse
+    fun create(routeRequest: RouteRequest): RouteResponse
+    fun delete(routeId: Long)
 }

@@ -18,12 +18,12 @@ class ManagerServiceImpl (
 
     override fun getById(managerId: Long): ManagerResponse =
         mapper.entityToResponse(dao.findById(managerId).orElseThrow {
-            IllegalArgumentException("Driver not found with id $managerId")
+            IllegalArgumentException("Manager not found with id $managerId")
         })
 
     override fun updateProfile(managerId: Long, managerRequest: ManagerRequest): ManagerResponse {
         val manager = dao.findById(managerId).orElseThrow {
-            IllegalArgumentException("Driver not found with id $managerId")
+            IllegalArgumentException("Manager not found with id $managerId")
         }
         manager.phoneNumber = managerRequest.phoneNumber
         manager.email = managerRequest.email
@@ -42,7 +42,7 @@ class ManagerServiceImpl (
 
     override fun delete(managerId: Long) {
         val manager = dao.findById(managerId).orElseThrow {
-            IllegalArgumentException("Driver not found with id $managerId")
+            IllegalArgumentException("Manager not found with id $managerId")
         }
         dao.delete(manager)
     }
