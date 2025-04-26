@@ -3,9 +3,8 @@ package com.example.drivercabinet.util
 import com.example.drivercabinet.database.entity.Driver
 import com.example.drivercabinet.model.request.DriverRequest
 import com.example.drivercabinet.model.response.DriverResponse
-import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
-import org.springframework.stereotype.Service
+
 @Component
 class DriverMapper {
     fun entityToResponse(entity: Driver) : DriverResponse =

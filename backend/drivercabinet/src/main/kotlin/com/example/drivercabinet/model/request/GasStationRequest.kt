@@ -1,7 +1,8 @@
 package com.example.drivercabinet.model.request
 
+import com.example.drivercabinet.database.entity.FuelType
+
 data class GasStationRequest(
-    val name: String,
     val address: String,
-    val fuelTypes: String
+    val fuelTypes: Set<FuelType>
 )

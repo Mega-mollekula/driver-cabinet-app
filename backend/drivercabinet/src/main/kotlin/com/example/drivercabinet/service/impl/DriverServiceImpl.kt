@@ -44,7 +44,7 @@ class DriverServiceImpl(
         driver.email = driverRequest.email
         driver.status = driverRequest.status
         driver.rating = driverRequest.rating
-
+        driver.name = driverRequest.name
         dao.save(driver)
 
         return mapper.entityToResponse(driver)

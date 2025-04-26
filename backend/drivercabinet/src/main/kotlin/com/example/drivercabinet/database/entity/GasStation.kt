@@ -9,13 +9,22 @@ class GasStation(
     val id: Long = 0,
 
     @Column(nullable = false, unique = true)
-    val name: String,
+    var address: String,
 
-    @Column(nullable = false, unique = true)
-    val address: String,
-
-    val fuelTypes: String,
+    @Column(name = "fuel_type")
+    @Enumerated(EnumType.STRING)
+    var fuelTypes: Set<FuelType> = mutableSetOf(),
 
     @ManyToMany(mappedBy = "gasStations")
     val routes: List<Route> = mutableListOf()
 )
+
+
+enum class FuelType {
+    PETROL_92,
+    PETROL_95,
+    PETROL_98,
+    PETROL_100,
+    DIESEL,
+    ELECTRIC
+}

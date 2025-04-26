@@ -12,7 +12,6 @@ class DriverController(
     val driverService: DriverService,
 ) {
 
-    // Получение всех водителей
     @GetMapping
     fun getAllDrivers(): List<DriverResponse> {
         return driverService.getAll()
@@ -24,14 +23,12 @@ class DriverController(
         return driverService.getById(driverId)
     }
 
-    // Создание нового водителя
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun createDriver(@RequestBody driverRequest: DriverRequest): DriverResponse {
         return driverService.create(driverRequest)
     }
 
-    // Обновление данных водителя
     @PutMapping("/{driverId}")
     fun updateDriver(
         @PathVariable driverId: Long,
@@ -40,7 +37,6 @@ class DriverController(
         return driverService.updateProfile(driverId, driverRequest)
     }
 
-    // Обновление статуса водителя
     @PatchMapping("/{driverId}/status")
     fun updateDriverStatus(
         @PathVariable driverId: Long,
@@ -54,7 +50,6 @@ class DriverController(
         return driverService.updateStatus(driverId, status)
     }
 
-    // Удаление водителя
     @DeleteMapping("/{driverId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteDriver(@PathVariable driverId: Long) {

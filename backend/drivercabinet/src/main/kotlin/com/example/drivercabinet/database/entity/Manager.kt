@@ -9,10 +9,10 @@ data class Manager(
     val id: Long = 0,
 
     @Column(nullable = false)
-    val name: String,
+    var name: String,
 
     @Column(nullable = false, unique = true)
-    val email: String,
+    var email: String,
 
     @Column(nullable = false, unique = true)
     var phoneNumber: String
