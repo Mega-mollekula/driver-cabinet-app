@@ -8,7 +8,8 @@ interface DriverService {
     fun updateStatus(driverId: Long, newStatus: DriverStatus): DriverResponse
     fun getAll(): List<DriverResponse>
     fun getById(driverId: Long): DriverResponse
-    fun updateProfile(driverId: Long, driverRequest: DriverRequest): DriverResponse
+    fun updateRating(driverId: Long, rating: Double): DriverResponse
     fun create(driverRequest: DriverRequest): DriverResponse
     fun delete(driverId: Long)
+    fun createReferralDriver(driverRequest: DriverRequest, driverId: Long): DriverResponse
 }

@@ -1,5 +1,6 @@
 package com.example.drivercabinet.database.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import java.time.LocalDateTime
@@ -13,16 +14,23 @@ data class Order(
     val description: String? = null,
 
     @CreationTimestamp
-    val startTime: LocalDateTime,
+    val startTime: LocalDateTime?,
 
-    val endTime: LocalDateTime? = null,
+    var endTime: LocalDateTime? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "driver_id", nullable = false)
-    val driver: Driver,
+    @JsonBackReference
+    @JoinColumn(name = "driver_id")
+    var driver: Driver? = null,
 
     @OneToOne(cascade = [CascadeType.ALL], orphanRemoval = true)
     @JoinColumn(name = "route_id", nullable = false)
-    val route: Route
+    var route: Route,
+
+    @Enumerated(EnumType.STRING)
+    var status: OrderStatus = OrderStatus.PENDING
 )
 
+enum class OrderStatus {
+    PENDING, IN_PROGRESS, COMPLETED  // Статусы заказа
+}

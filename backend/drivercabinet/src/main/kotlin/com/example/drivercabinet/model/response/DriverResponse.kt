@@ -10,7 +10,9 @@ data class DriverResponse(
     val phoneNumber: String,
     val status: DriverStatus,
     val rating: Double,
-    val referrals: List<Driver>,
+    val referrals: MutableList<Driver>,
     val email: String,
-    val orders: List<Order>
+    val orders: List<Order>,
+    val points: Int,
+    val referrer: Driver?
 )

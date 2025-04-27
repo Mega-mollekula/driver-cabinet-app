@@ -25,16 +25,12 @@ class DriverController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createDriver(@RequestBody driverRequest: DriverRequest): DriverResponse {
-        return driverService.create(driverRequest)
-    }
-
-    @PutMapping("/{driverId}")
-    fun updateDriver(
-        @PathVariable driverId: Long,
-        @RequestBody driverRequest: DriverRequest
-    ): DriverResponse {
-        return driverService.updateProfile(driverId, driverRequest)
+    fun createDriver(@RequestBody driverRequest: DriverRequest, @RequestParam(required = false) driverId: Long? = null): DriverResponse {
+        return if (driverId != null) {
+            driverService.createReferralDriver(driverRequest, driverId)
+        } else {
+            driverService.create(driverRequest)
+        }
     }
 
     @PatchMapping("/{driverId}/status")

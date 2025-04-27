@@ -17,34 +17,27 @@ class DriverServiceImpl(
         val driver = dao.findById(driverId).orElseThrow {
             IllegalArgumentException("Driver not found with id $driverId")
         }
-
         driver.status = newStatus
+        if (newStatus == DriverStatus.EMERGENCY) {
+            driver.rating -= 0.1
+        }
         dao.save(driver)
-
         return mapper.entityToResponse(driver)
     }
 
-
     override fun getAll(): List<DriverResponse> =
         dao.findAll().map { mapper.entityToResponse(it) }
-
-
 
     override fun getById(driverId: Long): DriverResponse =
         mapper.entityToResponse(dao.findById(driverId).orElseThrow {
             IllegalArgumentException("Driver not found with id $driverId")
         })
 
-
-    override fun updateProfile(driverId: Long, driverRequest: DriverRequest): DriverResponse {
+    override fun updateRating(driverId: Long, rating: Double): DriverResponse {
         val driver = dao.findById(driverId).orElseThrow {
             IllegalArgumentException("Driver not found with id $driverId")
         }
-        driver.phoneNumber = driverRequest.phoneNumber
-        driver.email = driverRequest.email
-        driver.status = driverRequest.status
-        driver.rating = driverRequest.rating
-        driver.name = driverRequest.name
+        driver.rating = rating
         dao.save(driver)
 
         return mapper.entityToResponse(driver)
@@ -62,4 +55,28 @@ class DriverServiceImpl(
         }
         dao.delete(driver)
     }
+
+    override fun createReferralDriver(driverRequest: DriverRequest, driverId: Long): DriverResponse {
+        val driver = dao.findById(driverId).orElseThrow {
+            IllegalArgumentException("Driver not found with id $driverId")
+        }
+
+        // Создаем реферала
+        val referral = mapper.requestToEntity(driverRequest)
+
+        // Устанавливаем связь
+        referral.referrer = driver
+
+        // Сохраняем реферала СНАЧАЛА
+        val savedReferral = dao.save(referral)
+
+        // Потом добавляем его в список рефералов водителя
+        driver.referrals.add(savedReferral)
+
+        // Сохраняем водителя (можно не сохранять, если не используешь список referrals в ответе)
+        dao.save(driver)
+
+        return mapper.entityToResponse(savedReferral)
+    }
+
 }

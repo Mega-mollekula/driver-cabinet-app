@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 @Service
 class RoutServiceImpl (
     val dao: RouteDao,
-    private val gasStationDao: GasStationDao,
+    val gasStationDao: GasStationDao,
     val mapper: RouteMapper,
 ) : RouteService {
 
