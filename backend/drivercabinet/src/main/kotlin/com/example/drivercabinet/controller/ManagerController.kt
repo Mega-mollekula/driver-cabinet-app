@@ -28,10 +28,7 @@ class ManagerController(
     }
 
     @PutMapping("/{managerId}")
-    fun updateManager(
-        @PathVariable managerId: Long,
-        @RequestBody managerRequest: ManagerRequest
-    ): ManagerResponse {
+    fun updateManager(@PathVariable managerId: Long, @RequestBody managerRequest: ManagerRequest): ManagerResponse {
         return managerService.updateProfile(managerId, managerRequest)
     }
 

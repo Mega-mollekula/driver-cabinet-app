@@ -11,4 +11,6 @@ interface DriverService {
     fun updateRating(driverId: Long, rating: Double): DriverResponse
     fun create(driverRequest: DriverRequest, referrerId: Long?): DriverResponse
     fun delete(driverId: Long)
+    fun assignOrderToDriver(orderId: Long, driverId: Long): DriverResponse
+    fun completeOrder(orderId: Long): DriverResponse
 }

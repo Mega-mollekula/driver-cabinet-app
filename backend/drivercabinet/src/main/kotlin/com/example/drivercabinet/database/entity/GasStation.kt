@@ -21,7 +21,6 @@ class GasStation(
     val routes: List<Route> = mutableListOf()
 )
 
-
 enum class FuelType {
     PETROL_92,
     PETROL_95,

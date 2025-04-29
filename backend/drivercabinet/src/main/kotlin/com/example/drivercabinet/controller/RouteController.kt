@@ -11,34 +11,30 @@ import org.springframework.web.bind.annotation.*
 class RouteResponse (
     val routeService: RouteService,
 ) {
-
     @GetMapping
     fun getAllRoutes(): List<RouteResponse> {
         return routeService.getAll()
     }
 
     @GetMapping("/{routeId}")
-    fun getStationById(@PathVariable routeId: Long): RouteResponse {
+    fun getRouteById(@PathVariable routeId: Long): RouteResponse {
         return routeService.getById(routeId)
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody routeRequest: RouteRequest): RouteResponse {
+    fun createRout(@RequestBody routeRequest: RouteRequest): RouteResponse {
         return routeService.create(routeRequest)
     }
 
     @PutMapping("/{routeId}")
-    fun update(
-        @PathVariable routeId: Long,
-        @RequestBody routeRequest: RouteRequest
-    ): RouteResponse {
+    fun updateRoute(@PathVariable routeId: Long, @RequestBody routeRequest: RouteRequest): RouteResponse {
         return routeService.update(routeId, routeRequest)
     }
 
     @DeleteMapping("/{routeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun delete(@PathVariable routeId: Long) {
+    fun deleteRoute(@PathVariable routeId: Long) {
         routeService.delete(routeId)
     }
 }

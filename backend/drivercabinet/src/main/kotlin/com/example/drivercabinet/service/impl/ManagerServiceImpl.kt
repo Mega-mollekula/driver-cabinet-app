@@ -47,6 +47,3 @@ class ManagerServiceImpl (
         dao.delete(manager)
     }
 }
-
-
-

@@ -8,6 +8,4 @@ interface OrderService {
     fun getById(orderId: Long): OrderResponse
     fun create(orderRequest: OrderRequest): OrderResponse
     fun delete(orderId: Long)
-    fun completeOrder(orderId: Long): OrderResponse
-    fun assignOrderToDriver(orderId: Long, driverId: Long): OrderResponse
 }

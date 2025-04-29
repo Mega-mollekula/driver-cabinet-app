@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/gasStations")
+@RequestMapping("/gas-stations")
 class GasStationController(
     val gasStationService: GasStationService,
 ) {
@@ -23,21 +23,18 @@ class GasStationController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody gasStationRequest: GasStationRequest): GasStationResponse {
+    fun createStation(@RequestBody gasStationRequest: GasStationRequest): GasStationResponse {
         return gasStationService.create(gasStationRequest)
     }
 
     @PutMapping("/{gasStationId}")
-    fun update(
-        @PathVariable gasStationId: Long,
-        @RequestBody gasStationRequest: GasStationRequest
-    ): GasStationResponse {
+    fun updateStation(@PathVariable gasStationId: Long, @RequestBody gasStationRequest: GasStationRequest): GasStationResponse {
         return gasStationService.update(gasStationId, gasStationRequest)
     }
 
     @DeleteMapping("/{gasStationId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun delete(@PathVariable gasStationId: Long) {
+    fun deleteStation(@PathVariable gasStationId: Long) {
         gasStationService.delete(gasStationId)
     }
 }

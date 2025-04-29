@@ -32,14 +32,4 @@ class OrderController(
     fun deleteOrder(@PathVariable orderId: Long) {
         orderService.delete(orderId)
     }
-
-    @PostMapping("/{orderId}/complete")
-    fun completeOrder(@PathVariable orderId: Long): OrderResponse {
-        return orderService.completeOrder(orderId)
-    }
-
-    @PostMapping("/{orderId}/assign/{driverId}")
-    fun assignOrderToDriver(@PathVariable orderId: Long, @PathVariable driverId: Long): OrderResponse {
-        return orderService.assignOrderToDriver(orderId, driverId)
-    }
 }

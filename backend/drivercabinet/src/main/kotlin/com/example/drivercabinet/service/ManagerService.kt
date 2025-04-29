@@ -10,4 +10,3 @@ interface ManagerService {
     fun create(managerRequest: ManagerRequest): ManagerResponse
     fun delete(managerId: Long)
 }
-

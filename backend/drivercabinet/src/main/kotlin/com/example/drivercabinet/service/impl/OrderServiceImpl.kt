@@ -17,7 +17,6 @@ import java.time.LocalDateTime
 class OrderServiceImpl (
     val orderDao: OrderDao,
     val routeDao: RouteDao,
-    val driverDao: DriverDao,
     val mapper: OrderMapper,
 ) : OrderService {
 
@@ -44,51 +43,4 @@ class OrderServiceImpl (
         }
         orderDao.delete(order)
     }
-
-    @Transactional
-    override fun completeOrder(orderId: Long): OrderResponse {
-        // Получаем заказ по ID
-        val order = orderDao.findById(orderId).orElseThrow {
-            IllegalArgumentException("Order not found with id $orderId")
-        }
-        val driver = order.driver
-        if (driver != null) {
-            driver.rating = (driver.rating + 0.05).coerceAtMost(5.0)
-            driverDao.save(driver)
-        }
-        order.endTime = LocalDateTime.now()
-        order.status = OrderStatus.COMPLETED
-
-        orderDao.save(order)
-        return mapper.entityToResponse(order)
-    }
-
-    @Transactional
-    override fun assignOrderToDriver(orderId: Long, driverId: Long): OrderResponse {
-        val order = orderDao.findById(orderId).orElseThrow {
-            IllegalArgumentException("Order not found with id $orderId")
-        }
-
-        if (order.status == OrderStatus.COMPLETED) {
-            throw IllegalStateException("Cannot assign a completed order.")
-        }
-
-        val driver = driverDao.findById(driverId).orElseThrow {
-            IllegalArgumentException("Driver not found with id $driverId")
-        }
-
-        if (driver.status != DriverStatus.AVAILABLE) {
-            throw IllegalStateException("Driver is not available.")
-        }
-        order.driver = driver
-        order.status = OrderStatus.IN_PROGRESS
-
-        orderDao.save(order)
-        return mapper.entityToResponse(order)
-    }
 }
-
-
-
-
-

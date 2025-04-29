@@ -12,7 +12,6 @@ class ReferralService(
     private val driverDao: DriverDao,
     private val orderDao: OrderDao
 )  {
-
     @Transactional
     fun processReferrals() {
         val drivers = driverDao.findAll()
