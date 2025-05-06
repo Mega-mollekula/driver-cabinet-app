@@ -2,6 +2,7 @@ package com.example.drivercabinet.service.impl
 
 import com.example.drivercabinet.database.entity.DriverStatus
 import com.example.drivercabinet.database.entity.OrderStatus
+import com.example.drivercabinet.database.entity.Role
 import com.example.drivercabinet.database.repository.DriverDao
 import com.example.drivercabinet.database.repository.OrderDao
 import com.example.drivercabinet.model.request.DriverRequest
@@ -110,6 +111,24 @@ class DriverServiceImpl(
         order.driver = driver
         order.status = OrderStatus.IN_PROGRESS
         orderDao.save(order)
+        return mapper.entityToResponse(driver)
+    }
+
+    override fun changeRole(driverId: Long, newRole: Role): DriverResponse {
+        val driver = driverDao.findById(driverId)
+            .orElseThrow { IllegalArgumentException("Driver not found") }
+
+        driver.role = newRole
+        driverDao.save(driver)
+        return mapper.entityToResponse(driver)
+    }
+
+    override fun approveDriver(driverId: Long): DriverResponse {
+        val driver = driverDao.findById(driverId)
+            .orElseThrow { IllegalArgumentException("Driver not found") }
+
+        driver.isApproved = true
+        driverDao.save(driver)
         return mapper.entityToResponse(driver)
     }
 }

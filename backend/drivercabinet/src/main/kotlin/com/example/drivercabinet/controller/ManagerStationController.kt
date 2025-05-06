@@ -1,4 +1,5 @@
 package com.example.drivercabinet.controller
+
 import com.example.drivercabinet.model.request.GasStationRequest
 import com.example.drivercabinet.model.response.GasStationResponse
 import com.example.drivercabinet.service.GasStationService
@@ -6,11 +7,10 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/gas-stations")
-class GasStationController(
-    val gasStationService: GasStationService,
+@RequestMapping("/manager/gas-stations")
+class ManagerStationController(
+    val gasStationService: GasStationService
 ) {
-
     @GetMapping
     fun getAllStations(): List<GasStationResponse> {
         return gasStationService.getAll()

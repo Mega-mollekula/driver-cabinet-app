@@ -42,8 +42,25 @@ class Driver(
     @CreationTimestamp
     @Column(updatable = false)
     val createdAt: LocalDateTime? = null,
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    var role: Role = Role.DRIVER,
+
+    @Column(nullable = false)
+    var password: String, // будет хешированным
+
+    @Column(nullable = false)
+    var isApproved: Boolean = false, // подтвержден менеджером
+
+    var verificationCode: String? = null // код для подтверждения регистрации
 )
 
 enum class DriverStatus {
     AVAILABLE, ON_ROUTE, OFFLINE, EMERGENCY
 }
+
+enum class Role {
+    DRIVER, ADMIN, MANAGER
+}
+

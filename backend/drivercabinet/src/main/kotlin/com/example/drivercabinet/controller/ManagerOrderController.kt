@@ -1,16 +1,16 @@
 package com.example.drivercabinet.controller
+
 import com.example.drivercabinet.model.request.OrderRequest
 import com.example.drivercabinet.model.response.OrderResponse
+import com.example.drivercabinet.service.OrderService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import com.example.drivercabinet.service.OrderService
 
 @RestController
-@RequestMapping("/orders")
-class OrderController(
-    val orderService: OrderService,
+@RequestMapping("/manager/orders")
+class ManagerOrderController(
+    val orderService: OrderService
 ) {
-
     @GetMapping
     fun getAllOrders(): List<OrderResponse> {
         return orderService.getAll()

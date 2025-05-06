@@ -7,10 +7,10 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/routes")
-class RouteResponse (
+@RequestMapping("manager/routes")
+class ManagerRouteController (
     val routeService: RouteService,
-) {
+){
     @GetMapping
     fun getAllRoutes(): List<RouteResponse> {
         return routeService.getAll()

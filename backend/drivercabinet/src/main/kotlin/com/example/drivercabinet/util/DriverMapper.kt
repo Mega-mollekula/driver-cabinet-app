@@ -1,7 +1,6 @@
 package com.example.drivercabinet.util
 
 import com.example.drivercabinet.database.entity.Driver
-import com.example.drivercabinet.database.entity.DriverStatus
 import com.example.drivercabinet.model.request.DriverRequest
 import com.example.drivercabinet.model.response.DriverResponse
 import org.springframework.stereotype.Component
@@ -27,5 +26,6 @@ class DriverMapper {
             name = request.name,
             phoneNumber = request.phoneNumber,
             email = request.email,
+            password = request.password,
         )
 }

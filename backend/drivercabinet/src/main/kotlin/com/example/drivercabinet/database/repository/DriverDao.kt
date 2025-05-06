@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface DriverDao : JpaRepository<Driver, Long> {
+    fun existsByEmail(email: String): Boolean
+    fun findByEmail(email: String): Driver?
 }
