@@ -11,7 +11,7 @@ class DriverController(
 ) {
 
     @PatchMapping("/{driverId}/status")
-    fun updateDriverStatus(@PathVariable driverId: Long, @RequestParam newStatus: String): DriverResponse {
+    fun updateDriverStatus(@PathVariable driverId: Long, @RequestBody newStatus: String): DriverResponse {
         val status = try {
             DriverStatus.valueOf(newStatus.toUpperCase())
         } catch (e: IllegalArgumentException) {
@@ -28,6 +28,11 @@ class DriverController(
     @PostMapping("/{driverId}/orders/{orderId}/assign")
     fun assignOrder(@PathVariable driverId: Long, @PathVariable orderId: Long) : DriverResponse {
         return driverService.assignOrderToDriver(driverId, orderId)
+    }
+
+    @GetMapping("/{driverId}")
+    fun getDriverById(@PathVariable driverId: Long): DriverResponse {
+        return driverService.getById(driverId)
     }
 
 //        @DeleteMapping("/{driverId}")
